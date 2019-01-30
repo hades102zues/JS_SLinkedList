@@ -89,8 +89,17 @@ class SinglyLinkedList {
 
 	unshift(val) {
 		const newNode = new Node(val); // create a new node
+
+		if (!this.head) { //edge case -- list is empty
+			this.head = newNode;
+			this.tail = newNode;
+		}
+
 		newNode.next= this.head; // have the new node point to the head
 		this.head = newNode; //have the head point to the new node
+		this.length++;
+
+		return this;
 
 	}
 }
