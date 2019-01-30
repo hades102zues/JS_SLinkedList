@@ -124,6 +124,22 @@ class SinglyLinkedList {
 
 			return current;
 	}
+
+	set(index, val){
+		//Accept an index and a value
+
+		//use the get function to get the item
+		const item = this.get(index);
+
+		if(item){ // if we get back an item
+			item.val = val; //update the value at the node 
+			return true; //and return true
+		}
+			//if we get nothing back then return false
+			return false;
+
+		
+	}
 }
 
 const list = new SinglyLinkedList();
