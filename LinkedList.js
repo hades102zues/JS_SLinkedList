@@ -44,31 +44,32 @@ class SinglyLinkedList {
 	pop(){
 		let poppedItem = this.head;
 
-		if(!poppedItem) return console.log('List is empty'); //edge case -- list is empty
+		if(!poppedItem) return 'List is empty'; //edge case -- list is empty
 
 		
 
-		if(this.length===1){ //edge case -- list has one item
+		if(this.length===1){ //edge case -- list has only one item
 			this.head=null;
 			this.tail=null;
-			return console.log(poppedItem);
-			this.length--; 
+			this.length--;
+			return poppedItem;
+			 
 		}
 
-		while(poppedItem.next !==this.tail){
+		while(poppedItem.next !==this.tail){//go to item before tail
 			poppedItem = poppedItem.next;
-		}//stops at item before tail
+		}
 
-		this.tail = poppedItem;
-		poppedItem  = poppedItem.next;
-		this.tail.next= null;
+		this.tail = poppedItem; //set to the new tail for the list
+		poppedItem  = poppedItem.next; //capture the last item of the list
+		this.tail.next= null; //cut off the last item from list
 		this.length--; 
 
-		console.log(poppedItem);
+		return poppedItem;
 	}
 }
 
 const list = new SinglyLinkedList();
 list.push('Hi');
-list.pop();
-list.traverse();
+console.log(list.pop());
+console.log(list);
