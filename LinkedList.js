@@ -24,9 +24,9 @@ class SinglyLinkedList {
 
 		} else {
 
-			//set the tail's next property to newNode
-			this.tail.next=newNode;
-			this.tail= newNode;
+			
+			this.tail.next=newNode; //set the tail's next property to newNode
+			this.tail= newNode; // move the tail to the newNode
 		}
 
 		this.length++;
@@ -85,7 +85,12 @@ class SinglyLinkedList {
 		this.length--;
 
 		return poppedItem
+	}
 
+	unshift(val) {
+		const newNode = new Node(val); // create a new node
+		newNode.next= this.head; // have the new node point to the head
+		this.head = newNode; //have the head point to the new node
 
 	}
 }
