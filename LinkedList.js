@@ -32,7 +32,24 @@ class SinglyLinkedList {
 		this.length++;
 		return this;
 	}
+
+	traverse(){
+		let current = this.head;
+		while (current) {
+			console.log(current.val);
+			current= current.next;
+		}
+	}
+
+	pop(){
+		let pre = this.head;
+
+		while(pre.next!==this.tail){}
+	}
 }
 
 const list = new SinglyLinkedList();
-console.log(list.push('Hi'));
+list.push('Hi');
+list.push('Mom');
+list.push(4);
+list.traverse();
