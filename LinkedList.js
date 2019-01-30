@@ -93,6 +93,8 @@ class SinglyLinkedList {
 		if (!this.head) { //edge case -- list is empty
 			this.head = newNode;
 			this.tail = newNode;
+			this.length++;
+			return this;
 		}
 
 		newNode.next= this.head; // have the new node point to the head
