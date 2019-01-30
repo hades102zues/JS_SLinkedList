@@ -15,32 +15,36 @@ class SinglyLinkedList {
 		this.tail=null;
 	}
 
+	//CREATE
 	push(val) {
 		const newNode = new Node(val);
 
 		if (!this.length) { //edge case- list is empty
-			this.head=newNode;
+			this.head=newNode; //then set head and tail to new node
 			this.tail=newNode;
 
 		} else {
 
-			
 			this.tail.next=newNode; //set the tail's next property to newNode
 			this.tail= newNode; // move the tail to the newNode
 		}
 
-		this.length++;
+		this.length++; //update the length
 		return this;
 	}
 
+	//READ
 	traverse(){
-		let current = this.head;
-		while (current) {
-			console.log(current.val);
+		let current = this.head; //set a pointer to start at the head of list
+		while (current) { //whilst the pointer is at a node(pointer is defined) 
+			
+			//log the item and then move on to the next item in the list
+			console.log(current.val); 
 			current= current.next;
 		}
 	}
 
+	//DELETE
 	pop(){
 		let poppedItem = this.head;
 
@@ -63,37 +67,39 @@ class SinglyLinkedList {
 		this.tail = poppedItem; //set to the new tail for the list
 		poppedItem  = poppedItem.next; //capture the last item of the list
 		this.tail.next= null; //cut off the last item from list
-		this.length--; 
+		this.length--;  // decrement the list length 
 
-		return poppedItem;
+		return poppedItem; //return the item
 	}
 
+	//DELETE
 	shift(){
-		let poppedItem = this.head;
+		let poppedItem = this.head; // start a pointer at the head
 
 		if (!poppedItem) return 'List is empty'; //edge case -- list is empty
 
-		if (this.length==1) {//edge case
-			this.head=null;
+		if (this.length==1) {//edge case -- list has a single item
+			this.head=null;	//set head and tail to null
 			this.tail=null;
-			this.length--;
-			return poppedItem;
+
+		} else {
+			this.head= poppedItem.next; //renagotiate the head
+		    poppedItem.next=null; //sever the item from the list
 		}
 
-		this.head= poppedItem.next; //renagotiate the head
-		poppedItem.next=null; //sever the item from the list
-		this.length--;
-
-		return poppedItem
+		
+		this.length--; //reduce the list size
+		return poppedItem //return the item
 	}
 
+	//CREATE
 	unshift(val) {
 		const newNode = new Node(val); // create a new node
 
 		if (!this.head) { //edge case -- list is empty
-			this.head = newNode;
+			this.head = newNode; //point both the head and tail to the new node
 			this.tail = newNode;
-			this.length++;
+			this.length++; //increase the list size and return the  list
 			return this;
 		}
 
@@ -105,6 +111,7 @@ class SinglyLinkedList {
 
 	}
 
+	//READ
 	get(index){
 		//accept an index from the user
 
@@ -125,6 +132,7 @@ class SinglyLinkedList {
 			return current;
 	}
 
+	//UPDATE
 	set(index, val){
 		//Accept an index and a value
 
@@ -137,8 +145,43 @@ class SinglyLinkedList {
 		}
 			//if we get nothing back then return false
 			return false;
-
 		
+	}
+
+	//CREATE
+	insert(index, val) {
+		//accept an index and a value
+
+		//check for an invalid index
+		if (index < 0 || index > this.length)
+			return false;
+
+		//edge case --
+		//if the index is 0 then simply perform a unshift!
+		if ( index === 0)
+			return this.unshift(val) ? true : false;
+		
+
+		//edge case --
+		//if the index is the length of the list then simply perform a push!
+		if (index === this.length)
+			return this.push(val) ? true : false;
+		
+
+		const newNode = new Node(val);
+
+		//get the node before the index
+		const pre = this.get(index-1);
+
+		//let the new node point to the pre.next
+		newNode.next = pre.next;
+
+		//and have pre.next point to the new node
+		pre.next = newNode;
+
+		//increment the length
+		this.length++;
+		return true
 	}
 }
 
