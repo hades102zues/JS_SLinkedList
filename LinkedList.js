@@ -97,19 +97,38 @@ class SinglyLinkedList {
 			return this;
 		}
 
-		newNode.next= this.head; // have the new node point to the head
+		newNode.next = this.head; // have the new node point to the head
 		this.head = newNode; //have the head point to the new node
 		this.length++;
 
 		return this;
 
 	}
+
+	get(index){
+		//accept an index from the user
+
+		//edge case  --
+		//if the index is not valid i.e.
+		if (index < 0 || index >= this.length) { //case**
+			return null;
+		}
+		
+			let current = this.head; //set a pointer to the head
+			let currentIndex = 0; //define a indexer for the pointer
+
+			while (currentIndex !== index) { //keep moving down the list until u reach the user defined index
+				currentIndex++;
+				current = current.next;
+			}
+
+			return current;
+	}
 }
 
 const list = new SinglyLinkedList();
 list.push('Hi');
-list.push('Mom');
-console.log(list.shift());
-console.log(list.shift());
-console.log(list.shift());
-list.traverse();
+console.log(list.get(0));
+// console.log(list.shift());
+// console.log(list.shift());
+// list.traverse();
