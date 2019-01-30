@@ -67,9 +67,33 @@ class SinglyLinkedList {
 
 		return poppedItem;
 	}
+
+	shift(){
+		let poppedItem = this.head;
+
+		if (!poppedItem) return 'List is empty'; //edge case -- list is empty
+
+		if (this.length==1) {//edge case
+			this.head=null;
+			this.tail=null;
+			this.length--;
+			return poppedItem;
+		}
+
+		this.head= poppedItem.next; //renagotiate the head
+		poppedItem.next=null; //sever the item from the list
+		this.length--;
+
+		return poppedItem
+
+
+	}
 }
 
 const list = new SinglyLinkedList();
 list.push('Hi');
-console.log(list.pop());
-console.log(list);
+list.push('Mom');
+console.log(list.shift());
+console.log(list.shift());
+console.log(list.shift());
+list.traverse();
