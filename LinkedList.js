@@ -42,14 +42,33 @@ class SinglyLinkedList {
 	}
 
 	pop(){
-		let pre = this.head;
+		let poppedItem = this.head;
 
-		while(pre.next!==this.tail){}
+		if(!poppedItem) return console.log('List is empty'); //edge case -- list is empty
+
+		
+
+		if(this.length===1){ //edge case -- list has one item
+			this.head=null;
+			this.tail=null;
+			return console.log(poppedItem);
+			this.length--; 
+		}
+
+		while(poppedItem.next !==this.tail){
+			poppedItem = poppedItem.next;
+		}//stops at item before tail
+
+		this.tail = poppedItem;
+		poppedItem  = poppedItem.next;
+		this.tail.next= null;
+		this.length--; 
+
+		console.log(poppedItem);
 	}
 }
 
 const list = new SinglyLinkedList();
 list.push('Hi');
-list.push('Mom');
-list.push(4);
+list.pop();
 list.traverse();
