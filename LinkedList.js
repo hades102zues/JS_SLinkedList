@@ -183,6 +183,44 @@ class SinglyLinkedList {
 		this.length++;
 		return true
 	}
+
+	//DELETE
+	delete(index) {
+
+		//accept an index
+
+		//check for an invalid index
+		if (index < 0 || index >= this.length)
+			return null;
+
+		//edge case --
+		//if the index is 0 then simply perform a shift!
+		if ( index === 0)
+			return this.shift();
+		
+
+		//edge case --
+		//if the index is the length-1 of the list then simply perform a pop!
+		if (index === this.length-1)
+			return this.pop();
+		
+
+		//get the node before the index
+		const pre = this.get(index-1);
+
+		//point to the item that pre points to
+		const poppedItem = pre.next;
+
+		//set pre.next to the poppedItem.next
+		const pre.next = poppedItem.next;
+
+		//sever poppedItem from ligt
+		poppedItem.next = null;
+
+
+		this.length--;//reduce the list size
+		return poppedItem;
+	}
 }
 
 const list = new SinglyLinkedList();
